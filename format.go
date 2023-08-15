@@ -56,6 +56,7 @@ var DefaultMsgFormat = "%Ns [%Level] %Msg%n"
 var (
 	DefaultFormatter *formatter
 	msgonlyformatter *formatter
+	hostname string
 )
 
 func init() {
@@ -65,6 +66,11 @@ func init() {
 	}
 	if msgonlyformatter, err = NewFormatter("%Msg"); err != nil {
 		reportInternalError(fmt.Errorf("error during creating msgonlyformatter: %s", err))
+	}
+	hostname, err = os.Hostname()
+	if error != nil {
+		reportInternalError(fmt.Errorf("error during getting hostname: %s", err))
+		hostname = ""
 	}
 }
 
@@ -438,11 +444,7 @@ func formattert(message string, level LogLevel, context LogContextInterface) int
 }
 
 func formatterHostname(message string, level LogLevel, context LogContextInterface) interface{} {
-	hostname, err := os.Hostname()
-	if err == nil {
-		return hostname
-	}
-	return ""
+	return hostname
 }
 
 func createDateTimeFormatterFunc(dateTimeFormat string) FormatterFunc {
