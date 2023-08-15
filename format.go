@@ -68,7 +68,7 @@ func init() {
 		reportInternalError(fmt.Errorf("error during creating msgonlyformatter: %s", err))
 	}
 	hostname, err = os.Hostname()
-	if error != nil {
+	if err != nil {
 		reportInternalError(fmt.Errorf("error during getting hostname: %s", err))
 		hostname = ""
 	}
