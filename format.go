@@ -32,6 +32,7 @@ import (
 	"strings"
 	"unicode"
 	"unicode/utf8"
+	"os"
 )
 
 // FormatterSymbol is a special symbol used in config files to mark special format aliases.
@@ -102,6 +103,7 @@ var formatterFuncs = map[string]FormatterFunc{
 	"r":         formatterr,
 	"n":         formattern,
 	"t":         formattert,
+	"Hostname":  formatterHostname
 }
 
 var formatterFuncsParameterized = map[string]FormatterFuncCreator{
@@ -433,6 +435,10 @@ func formattern(message string, level LogLevel, context LogContextInterface) int
 
 func formattert(message string, level LogLevel, context LogContextInterface) interface{} {
 	return "\t"
+}
+
+func formatterHostname(message string, level LogLevel, context LogContextInterface) interface{} {
+	return os.Hostname()
 }
 
 func createDateTimeFormatterFunc(dateTimeFormat string) FormatterFunc {
