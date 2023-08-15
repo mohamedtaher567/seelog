@@ -103,7 +103,7 @@ var formatterFuncs = map[string]FormatterFunc{
 	"r":         formatterr,
 	"n":         formattern,
 	"t":         formattert,
-	"Hostname":  formatterHostname
+	"Hostname":  formatterHostname,
 }
 
 var formatterFuncsParameterized = map[string]FormatterFuncCreator{
