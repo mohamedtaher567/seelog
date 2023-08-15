@@ -438,7 +438,11 @@ func formattert(message string, level LogLevel, context LogContextInterface) int
 }
 
 func formatterHostname(message string, level LogLevel, context LogContextInterface) interface{} {
-	return os.Hostname()
+	hostname, err := os.Hostname()
+	if err == nil {
+		return hostname
+	}
+	return ""
 }
 
 func createDateTimeFormatterFunc(dateTimeFormat string) FormatterFunc {
